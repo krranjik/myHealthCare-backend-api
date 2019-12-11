@@ -12,12 +12,12 @@ const user = mongoose.model('user', {
         trim: true
     },
     email: {
-        type: email,
+        type: String,
         require: true,
         trim: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: true,
         trim: true
     },
