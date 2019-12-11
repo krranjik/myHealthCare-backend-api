@@ -20,7 +20,7 @@ const doctor = mongoose.model('doctor', {
     },
 
     phone: {
-        type: number,
+        type: String,
         require: true,
         trim: true
     },
