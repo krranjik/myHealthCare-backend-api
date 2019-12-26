@@ -27,12 +27,22 @@ const patientSchema = new mongoose.Schema({
         require: true,
         trim: true
     },
+    gender: {
+        type: String,
+        require: true,
+        trim: true
+    },
     bloodgroup: {
         type: String,
         require: true,
         trim: true
     },
     phone: {
+        type: String,
+        require: true,
+        trim: true
+    },
+    disease: {
         type: String,
         require: true,
         trim: true
@@ -52,7 +62,7 @@ patientSchema.statics.checkCrediantialsDb = async (username, password) => {
 
 patientSchema.methods.generateAuthToken = async function () {
     const patient = this
-    const token = jwt.sign({ _id: patient._id.toString() }, 'thisismynewcourse')
+    const token = jwt.sign({ _id: patient._id.toString() }, 'kritikranjit')
 
     console.log(token);
     patient.tokens = patient.tokens.concat({ token: token })

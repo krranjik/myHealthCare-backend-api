@@ -31,3 +31,5 @@ const doctor = mongoose.model('doctor', {
         trim: true
     },
 })
+
+module.exports = doctor

@@ -15,7 +15,8 @@ exports.registerPatient = (req, res) => {
 //select all patient function
 
 exports.getPatient = (req, res) => {
-    const getAllPatient = patient.find().then(function (getAllPatient) {
+    const getAllPatient = patient
+    .find().then(function (getAllPatient) {
         res.send(getAllPatient)
     }).catch(function (e) {
         res.send(e)
@@ -39,6 +40,17 @@ exports.updatePatient = (req, res) => {
     patient.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Patient has been updated successfully")
+        }).catch(function (e) {
+            res.send(e)
+        })
+}
+
+//delete patient function
+
+exports.deletePatient = (req, res) => {
+    patient.findOneAndDelete(req.params._id, req.body)
+        .then(function () {
+            res.send("Patient has been deleted")
         }).catch(function (e) {
             res.send(e)
         })
