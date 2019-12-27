@@ -7,8 +7,8 @@ const app = express()
 
 const patientRouter = require("./routers/patientRouter")
 const doctorRouter = require("./routers/doctorRouter")
-const appointRouter = require("./routers/appointmentRouter")
-const prescripRouter = require("./routers/prescriptionRouter")
+const appointmentRouter = require("./routers/appointmentRouter")
+const prescriptionRouter = require("./routers/prescriptionRouter")
 const reportRouter = require("./routers/reportRouter")
 
 //sending json data in UI
@@ -19,8 +19,8 @@ app.use(express.json())
 
 app.use(patientRouter)
 app.use(doctorRouter)
-app.use(appointRouter)
-app.use(prescripRouter)
+app.use(appointmentRouter)
+app.use(prescriptionRouter)
 app.use(reportRouter)
 
 app.listen(4000)
