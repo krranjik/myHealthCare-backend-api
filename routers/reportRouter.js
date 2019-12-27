@@ -1,0 +1,11 @@
+const express = require('express')
+const router = express.Router()
+const report = require("../controllers/reportController")
+
+router.post("/addreport", report.addReport)
+router.get("/getreport", report.getReport)
+router.get("/getreportbyid/:_id", report.getReportById)
+router.put("/updatereport/:_id", report.updateReport)
+router.delete("/deletereport/:_id", report.deleteReport)
+
+module.exports = router

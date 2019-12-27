@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const prescription = mongoose.model('prescription', {
-    user_id: {
+    patient_id: {
         type: String,
         require: true,
         trim: true

@@ -1,18 +1,24 @@
 const mongoose = require('mongoose')
 const report = mongoose.model('report', {
-    user_id: {
+    patient_id: {
         type: String,
         require: true,
         trim: true
     },
 
-    reports: {
+    doctor_id: {
         type: String,
         require: true,
         trim: true
     },
 
-    report_type: {
+    report_name: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
+    report_file: {
         type: String,
         require: true,
         trim: true
