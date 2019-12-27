@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const appointment = mongoose.model('appointment', {
-    user_id: {
+    patient_id: {
         type: String,
         require: true,
         trim: true
@@ -25,3 +25,5 @@ const appointment = mongoose.model('appointment', {
         trim: true
     },
 })
+
+module.exports = appointment
