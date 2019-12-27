@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
-const prescription = mongoose.model('prescription',{
+const prescription = mongoose.model('prescription', {
     user_id: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
+    doctor_id: {
         type: String,
         require: true,
         trim: true
@@ -10,5 +16,13 @@ const prescription = mongoose.model('prescription',{
         type: String,
         require: true,
         trim: true
+    },
+
+    prescription_file: {
+        type: String,
+        require: true,
+        trim: true
     }
 })
+
+module.exports = prescription

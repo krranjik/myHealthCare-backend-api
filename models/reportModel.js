@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const report = mongoose.model('report',{
+const report = mongoose.model('report', {
     user_id: {
         type: String,
         require: true,
@@ -18,3 +18,5 @@ const report = mongoose.model('report',{
         trim: true
     },
 })
+
+module.exports = report

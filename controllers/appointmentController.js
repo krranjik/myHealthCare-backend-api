@@ -45,7 +45,7 @@ exports.updateAppointment = (req, res) => {
 
 //delete appointment function
 exports.deleteAppointment = (req, res) => {
-    appointment.findOneAndDelete(req.params._id, req.body)
+    appointment.findOneAndDelete(req.params._id)
         .then(function () {
             res.send("Appointment has been deleted")
         }).catch(function (e) {

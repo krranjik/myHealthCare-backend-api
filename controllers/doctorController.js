@@ -44,7 +44,7 @@ exports.updateDoctor = (req, res) => {
 }
 //delete doctor function
 exports.deleteDoctor = (req, res) => {
-    doctor.findOneAndDelete(req.params._id, req.body)
+    doctor.findOneAndDelete(req.params._id)
         .then(function () {
             res.send("Doctor has been deleted")
         }).catch(function (e) {
