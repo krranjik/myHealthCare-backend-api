@@ -1,19 +1,32 @@
 {
   "name": "myhealthcare-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend for myHealthCare",
+  "main": "app.js",
+  "scripts": {
+    "start": "env-cmd -f ./.env nodemon ./app.js"
+  },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "env-cmd": "^10.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.4.1",
     "mongoose": "^5.7.13",
-    "node": "^13.3.0"
+    "node": "^13.3.0",
+    "nodemon": "^2.0.2",
+    "validator": "^12.1.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "Kritik Ranjit",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krranjik/myHealthCare-Backend.git"
   },
-  "author": "",
-  "license": "ISC"
+  "bugs": {
+    "url": "https://github.com/krranjik/myHealthCare-Backend/issues"
+  },
+  "homepage": "https://github.com/krranjik/myHealthCare-Backend#readme"
 }

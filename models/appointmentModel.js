@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const appointment = mongoose.model('appointment', {
+const appointmentSch = mongoose.Schema({
     patient_id: {
         type: String,
         require: true,
@@ -26,4 +26,6 @@ const appointment = mongoose.model('appointment', {
     },
 })
 
-module.exports = appointment
+const Appointment = mongoose.model('appointment', appointmentSch)
+
+module.exports = Appointment

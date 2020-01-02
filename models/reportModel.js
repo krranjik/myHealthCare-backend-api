@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const report = mongoose.model('report', {
+const reportSch = mongoose.Schema({
     patient_id: {
         type: String,
         require: true,
@@ -25,4 +25,5 @@ const report = mongoose.model('report', {
     },
 })
 
-module.exports = report
+const Report = mongoose.model('report', reportSch)
+module.exports = Report

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const prescription = mongoose.model('prescription', {
+const prescriptionSch = mongoose.Schema({
     patient_id: {
         type: String,
         require: true,
@@ -25,4 +25,5 @@ const prescription = mongoose.model('prescription', {
     }
 })
 
-module.exports = prescription
+const Prescription = mongoose.model('prescription', prescriptionSch)
+module.exports = Prescription

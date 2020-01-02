@@ -1,73 +1,94 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 
-const patientSchema = new mongoose.Schema({
-    name: {
+const patientSch = mongoose.Schema({
+    first_name: {
         type: String,
         require: true,
         trim: true
     },
+
+    last_name: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
     username: {
         type: String,
         require: true,
         trim: true
     },
+
     password: {
         type: String,
         require: true,
         trim: true
     },
+
     email: {
         type: String,
         require: true,
-        trim: true
+        unique: true,
+        lowercase: true,
+        validate: value => {
+            if (!validator.isEmail(value)) {
+                throw new Error({ error: 'Invalid Email address' })
+            }
+        }
     },
+
     address: {
         type: String,
         require: true,
         trim: true
     },
+
+    dob: {
+        type: Date,
+        require: true,
+        trim: true
+    },
+
     gender: {
         type: String,
         require: true,
         trim: true
     },
+
     bloodgroup: {
         type: String,
         require: true,
         trim: true
     },
+
     phone: {
         type: String,
         require: true,
         trim: true
     },
+
     disease: {
         type: String,
         require: true,
         trim: true
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }]
+
+    create_date: {
+        type: Date,
+        default: Date.now
+    },
+
+    update_date: {
+        type: Date,
+        default: Date.now
+    },
+
+    patient_img:{
+        type: String,
+        trim: true
+    },
 })
 
-patientSchema.statics.checkCrediantialsDb = async (username, password) => {
-    const patient1 = await patient.findOne({ username: username, password: password })
-    return patient1;
-}
-
-patientSchema.methods.generateAuthToken = async function () {
-    const patient = this
-    const token = jwt.sign({ _id: patient._id.toString() }, 'kritikranjit')
-
-    console.log(token);
-    patient.tokens = patient.tokens.concat({ token: token })
-    await patient.save()
-    return token
-}
-const patient = mongoose.model('patient', patientSchema)
-module.exports = patient
+const Patient = mongoose.model('patient', patientSch)
+module.exports = Patient
