@@ -23,10 +23,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krranjik/myHealthCare-Backend.git"
+    "url": "git+https://github.com/softwarica-github/t2-backend-api-krranjik.git"
   },
   "bugs": {
-    "url": "https://github.com/krranjik/myHealthCare-Backend/issues"
+    "url": "https://github.com/softwarica-github/t2-backend-api-krranjik/issues"
   },
-  "homepage": "https://github.com/krranjik/myHealthCare-Backend#readme"
+  "homepage": "https://github.com/softwarica-github/t2-backend-api-krranjik#readme"
 }
