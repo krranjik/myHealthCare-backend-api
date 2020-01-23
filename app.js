@@ -1,8 +1,8 @@
+//Import Database
 require("./database/databaseFile")
 
 // Import express
 const express = require('express')
-
 const bodyParser = require("body-parser")
 
 // Initialize the app
@@ -14,14 +14,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//calling routers
-
-const apiRouter = require("./routers/apiRouter")
-const patientRouter = require("./routers/patientRouter")
-const doctorRouter = require("./routers/doctorRouter")
-const appointmentRouter = require("./routers/appointmentRouter")
-const prescriptionRouter = require("./routers/prescriptionRouter")
-const reportRouter = require("./routers/reportRouter")
+//calling Routers
+const apiRouter = require("./router/apiRouter")
+const patientRouter = require("./router/patientRouter")
+const doctorRouter = require("./router/doctorRouter")
+const appointmentRouter = require("./router/appointmentRouter")
+const prescriptionRouter = require("./router/prescriptionRouter")
+const reportRouter = require("./router/reportRouter")
 
 //sending json data in UI
 app.use(express.json())
@@ -35,5 +34,3 @@ app.use(prescriptionRouter)
 app.use(reportRouter)
 
 app.listen(4000)
-
-//test comment

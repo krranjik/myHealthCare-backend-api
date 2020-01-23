@@ -13,12 +13,6 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
-    hospital: {
-        type: String,
-        require: true,
-        trim: true
-    },
-
     phone: {
         type: String,
         require: true,
