@@ -57,7 +57,8 @@ exports.deletePatient = (req, res) => {
         })
 }
 
-//function for Login Function
+//login function
+
 exports.patientLogin = async (req, res) => {
 
 

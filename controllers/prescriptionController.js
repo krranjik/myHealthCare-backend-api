@@ -1,6 +1,7 @@
 const prescription = require('../models/prescriptionModel')
 
 //add prescription function
+
 exports.addPrescription = (req, res) => {
     const addPres = new prescription(req.body)
     addPres.save().then(function () {
@@ -11,6 +12,7 @@ exports.addPrescription = (req, res) => {
 }
 
 //select all prescription function
+
 exports.getPrescription = (req, res) => {
     const getAllPres = prescription
         .find().then(function (getAllPres) {
@@ -21,6 +23,7 @@ exports.getPrescription = (req, res) => {
 }
 
 //select prescription by id function
+
 exports.getPrescriptionById = (req, res) => {
     prescription.findById(req.params._id)
         .then(function (presById) {
@@ -31,6 +34,7 @@ exports.getPrescriptionById = (req, res) => {
 }
 
 //update prescription function
+
 exports.updatePrescription = (req, res) => {
     prescription.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
@@ -41,6 +45,7 @@ exports.updatePrescription = (req, res) => {
 }
 
 //delete prescription function
+
 exports.deletePrescription = (req, res) => {
     prescription.findOneAndDelete(req.params._id)
         .then(function () {

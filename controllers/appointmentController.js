@@ -24,6 +24,7 @@ exports.getAppointment = (req, res) => {
 }
 
 //select appointment by id function
+
 exports.getAppointmentById = (req, res) => {
     appointment.findById(req.params._id)
         .then(function (appointmentById) {
@@ -34,6 +35,7 @@ exports.getAppointmentById = (req, res) => {
 }
 
 //update appointment function
+
 exports.updateAppointment = (req, res) => {
     appointment.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
@@ -44,6 +46,7 @@ exports.updateAppointment = (req, res) => {
 }
 
 //delete appointment function
+
 exports.deleteAppointment = (req, res) => {
     appointment.findOneAndDelete(req.params._id)
         .then(function () {

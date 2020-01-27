@@ -1,6 +1,7 @@
 const report = require('../models/reportModel')
 
 //add report function
+
 exports.addReport = (req, res) => {
     const addrep = new report(req.body)
     addrep.save().then(function () {
@@ -11,6 +12,7 @@ exports.addReport = (req, res) => {
 }
 
 //select all report function
+
 exports.getReport = (req, res) => {
     const getAllReport = report
         .find().then(function (getAllReport) {
@@ -21,6 +23,7 @@ exports.getReport = (req, res) => {
 }
 
 //select report by id function
+
 exports.getReportById = (req, res) => {
     report.findById(req.params._id)
         .then(function (reportById) {
@@ -31,6 +34,7 @@ exports.getReportById = (req, res) => {
 }
 
 //update report function
+
 exports.updateReport = (req, res) => {
     report.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
@@ -41,6 +45,7 @@ exports.updateReport = (req, res) => {
 }
 
 //delete report function
+
 exports.deleteReport = (req, res) => {
     report.findOneAndDelete(req.params._id)
         .then(function () {

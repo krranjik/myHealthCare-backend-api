@@ -24,6 +24,7 @@ exports.getDoctor = (req, res) => {
 }
 
 //select doctor by id function
+
 exports.findDoctorById = (req, res) => {
     doctor.findById(req.params._id)
         .then(function (doctorById) {
@@ -34,6 +35,7 @@ exports.findDoctorById = (req, res) => {
 }
 
 //update doctor function
+
 exports.updateDoctor = (req, res) => {
     doctor.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
@@ -43,6 +45,7 @@ exports.updateDoctor = (req, res) => {
         })
 }
 //delete doctor function
+
 exports.deleteDoctor = (req, res) => {
     doctor.findOneAndDelete(req.params._id)
         .then(function () {

@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //calling Routers
+const userRouter = require("./router/userRouter")
 const patientRouter = require("./router/patientRouter")
 const doctorRouter = require("./router/doctorRouter")
 const appointmentRouter = require("./router/appointmentRouter")
@@ -25,6 +26,7 @@ const reportRouter = require("./router/reportRouter")
 app.use(express.json())
 
 //use api routes in the app
+app.use(userRouter)
 app.use(patientRouter)
 app.use(doctorRouter)
 app.use(appointmentRouter)
