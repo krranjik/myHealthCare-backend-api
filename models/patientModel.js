@@ -2,13 +2,7 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 
 const patientSch = mongoose.Schema({
-    first_name: {
-        type: String,
-        require: true,
-        trim: true
-    },
-
-    last_name: {
+    name: {
         type: String,
         require: true,
         trim: true
@@ -29,13 +23,8 @@ const patientSch = mongoose.Schema({
     email: {
         type: String,
         require: true,
-        unique: true,
-        lowercase: true,
-        validate: value => {
-            if (!validator.isEmail(value)) {
-                throw new Error({ error: 'Invalid Email address' })
-            }
-        }
+        trim: true
+    
     },
 
     address: {
@@ -45,7 +34,7 @@ const patientSch = mongoose.Schema({
     },
 
     dob: {
-        type: Date,
+        type: String,
         require: true,
         trim: true
     },
@@ -68,27 +57,37 @@ const patientSch = mongoose.Schema({
         trim: true
     },
 
-    disease: {
-        type: String,
-        require: true,
-        trim: true
-    },
-
-    create_date: {
-        type: Date,
-        default: Date.now
-    },
-
-    update_date: {
-        type: Date,
-        default: Date.now
-    },
-
-    patient_img:{
+    patient_img: {
         type: String,
         trim: true
     },
-})
+
+
+},
+    { timestamps: true }
+)
+
+userSchema.methods.generateAuthToken = async function () {
+    // Generate an auth token for the user
+    const user = this
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
+    user.tokens = user.tokens.concat({ token })
+    await user.save()
+    return token
+}
+
+userSchema.statics.findByCredentials = async (email, password) => {
+    // Search for a user by email and password.
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new Error({ error: 'Invalid login credentials' })
+    }
+    const isPasswordMatch = await bcrypt.compare(password, user.password)
+    if (!isPasswordMatch) {
+        throw new Error({ error: 'Invalid login credentials' })
+    }
+    return user
+}
 
 const Patient = mongoose.model('patient', patientSch)
 module.exports = Patient

@@ -3,6 +3,7 @@ const patient = require("../models/patientModel")
 //register patient function
 
 exports.registerPatient = (req, res) => {
+    console.log(req.body)
     const register = new patient(req.body)
     register.save().then(function () {
         res.send("Patient has been registered")
@@ -55,3 +56,33 @@ exports.deletePatient = (req, res) => {
             res.send(e)
         })
 }
+
+exports.login = async function (req, res) {
+    try {
+        const { username, password } = req.body
+        const user = await User.findByCredentials(username, password)
+        if (!user) {
+            return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
+        }
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.logout = async function (req, res) {
+    // Log user out of the application
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token
+        })
+        await req.user.save()
+        res.json({
+            status: "success",
+            message: "Logout successful",
+        })
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}   
