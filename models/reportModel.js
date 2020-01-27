@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 const reportSch = mongoose.Schema({
     patient_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'patient',
         trim: true
     },
 
     doctor_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'doctor',
         trim: true
     },
 

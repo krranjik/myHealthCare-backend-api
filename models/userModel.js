@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 
-const userSchema = mongoose.Schema({
+const userSch = mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -21,12 +21,12 @@ const userSchema = mongoose.Schema({
     }]
 })
 
-user.statics.checkCrediantialsDb = async (email, password) => {
+userSch.statics.checkCrediantialsDb = async (email, password) => {
     const userCheck = await users.findOne({ email: email, password: password })
     return userCheck
 }
 
-user.methods.generateAuthToken = async function () {
+userSch.methods.generateAuthToken = async function () {
     const userAuth = this
     const token = jwt.sign({ _id: userAuth._id.toString() }, 'thisismynewcourse')
 
@@ -36,6 +36,6 @@ user.methods.generateAuthToken = async function () {
     return token
 }
 
-const User = mongoose.model('user', userSchema)
+const User = mongoose.model('user', userSch)
 
 module.exports = User
