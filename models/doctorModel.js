@@ -7,7 +7,7 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
-    gender: {
+    department: {
         type: String,
         require: true,
         trim: true
@@ -19,12 +19,26 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
-    type: {
+    description: {
         type: String,
         require: true,
         trim: true
     },
-})
+
+    location: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
+    rating: {
+        type: String,
+        require: true,
+        trim: true
+    },
+},
+    { timestamps: true }
+)
 
 const Doctor = mongoose.model('doctor', doctorSch)
 module.exports = Doctor

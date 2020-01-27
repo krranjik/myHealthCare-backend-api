@@ -17,11 +17,11 @@ exports.registerPatient = (req, res) => {
 
 exports.getPatient = (req, res) => {
     const getAllPatient = patient
-    .find().then(function (getAllPatient) {
-        res.send(getAllPatient)
-    }).catch(function (e) {
-        res.send(e)
-    })
+        .find().then(function (getAllPatient) {
+            res.send(getAllPatient)
+        }).catch(function (e) {
+            res.send(e)
+        })
 }
 
 //select patient by id function
@@ -57,32 +57,18 @@ exports.deletePatient = (req, res) => {
         })
 }
 
-exports.login = async function (req, res) {
-    try {
-        const { username, password } = req.body
-        const user = await User.findByCredentials(username, password)
-        if (!user) {
-            return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
-        }
-        const token = await user.generateAuthToken()
-        res.send({ user, token })
-    } catch (error) {
-        res.status(400).send(error)
-    }
-}
+//function for Login Function
+exports.patientLogin = async (req, res) => {
 
-exports.logout = async function (req, res) {
-    // Log user out of the application
+
     try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token != req.token
-        })
-        await req.user.save()
-        res.json({
-            status: "success",
-            message: "Logout successful",
-        })
-    } catch (error) {
-        res.status(500).send(error)
+        const patient1 = await patient.checkCrediantialsDb(req.body.username,
+            req.body.password)
+        const token = await patient1.generateAuthToken()
+        const name = await patient1.name;
+        res.send({ name, token })
+    }
+    catch (e) {
+        res.status(400).send()
     }
 }   

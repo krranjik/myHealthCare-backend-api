@@ -8,7 +8,7 @@ const patientSch = mongoose.Schema({
         trim: true
     },
 
-    patientname: {
+    username: {
         type: String,
         require: true,
         trim: true
@@ -51,6 +51,18 @@ const patientSch = mongoose.Schema({
         trim: true
     },
 
+    weight: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
+    height: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
     phone: {
         type: String,
         require: true,
@@ -61,12 +73,18 @@ const patientSch = mongoose.Schema({
         type: String,
         trim: true
     },
+
+    tokens: [{
+        token: {
+            type: String,
+        }
+    }]
 },
     { timestamps: true }
 )
 
 patientSch.statics.checkCrediantialsDb = async (username, password) => {
-    const patientCheck = await patients.findOne({ username: username, password: password })
+    const patientCheck = await Patient.findOne({ username: username, password: password })
     return patientCheck
 }
 
