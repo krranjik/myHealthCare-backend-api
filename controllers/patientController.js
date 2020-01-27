@@ -3,13 +3,27 @@ const patient = require("../models/patientModel")
 //register patient function
 
 exports.registerPatient = (req, res) => {
-    console.log(req.body)
-    const register = new patient(req.body)
-    register.save().then(function () {
-        res.send("Patient has been registered")
+    req.files.map(function (items) {
+        const regPatient = new patient({
+            name: req.body.name,
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            address: req.body.address,
+            dob: req.body.dob,
+            gender: req.body.gender,
+            bloodgroup: req.body.bloodgroup,
+            weight: req.body.weight,
+            height: req.body.height,
+            phone: req.body.phone,
+            patient_img: items.filename
+        })
+        regPatient.save().then(function () {
+            res.send("Patient has been registered")
 
-    }).catch(function (e) {
-        res.send(e)
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
 }
 

@@ -3,11 +3,18 @@ const report = require('../models/reportModel')
 //add report function
 
 exports.addReport = (req, res) => {
-    const addrep = new report(req.body)
-    addrep.save().then(function () {
-        res.send("Report has been added")
-    }).catch(function (e) {
-        res.send(e)
+    req.files.map(function (items) {
+        const addrep = new report({
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            report_name: req.body.report_name,
+            report_file: items.filename
+        })
+        addrep.save().then(function () {
+            res.send("Report has been added")
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
 }
 

@@ -3,11 +3,18 @@ const prescription = require('../models/prescriptionModel')
 //add prescription function
 
 exports.addPrescription = (req, res) => {
-    const addPres = new prescription(req.body)
-    addPres.save().then(function () {
-        res.send("Prescription has been added")
-    }).catch(function (e) {
-        res.send(e)
+    req.files.map(function (items) {
+        const addPres = new prescription({
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            prescription_name: req.body.prescription_name,
+            prescription_file: items.filename
+        })
+        addPres.save().then(function () {
+            res.send("Prescription has been added")
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
 }
 

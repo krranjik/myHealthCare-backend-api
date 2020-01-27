@@ -36,6 +36,12 @@ const doctorSch = mongoose.Schema({
         require: true,
         trim: true
     },
+
+    doctor_img: {
+        type: String,
+        require: true,
+        trim: true
+    }
 },
     { timestamps: true }
 )

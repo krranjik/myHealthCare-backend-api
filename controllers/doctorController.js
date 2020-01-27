@@ -3,14 +3,23 @@ const doctor = require('../models/doctorModel')
 //doctor register function
 
 exports.registerDoctor = (req, res) => {
-    const regDoctor = new doctor(req.body)
+    req.files.map(function (items) {
+        const regDoctor = new doctor({
+            name: req.body.name,
+            department: req.body.department,
+            phone: req.body.phone,
+            description: req.body.description,
+            location: req.body.location,
+            rating: req.body.rating,
+            doctor_img: items.filename
+        })
     regDoctor.save().then(function () {
         res.send("Doctor has been added successfully")
 
     }).catch(function (e) {
         res.send(e)
     })
-}
+})}
 
 //select all doctor function
 

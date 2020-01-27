@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const report = require("../controllers/reportController")
+const upload = require('../controllers/uploadImage');
 
-router.post("/addreport", report.addReport)
+router.post("/addreport", upload, report.addReport)
 router.get("/getreport", report.getReport)
 router.get("/getreportbyid/:_id", report.getReportById)
 router.put("/updatereport/:_id", report.updateReport)
