@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = require('../model/User');
-const auth = async (req, res, next) => {
+const User = require('../models/userModel');
+const userAuth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, 'thisismynewcourse')
@@ -17,4 +17,4 @@ const auth = async (req, res, next) => {
         res.status(401).send({ error: 'Please authenticate.' })
     }
 }
-module.exports = auth;
+module.exports = userAuth;

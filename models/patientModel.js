@@ -8,7 +8,7 @@ const patientSch = mongoose.Schema({
         trim: true
     },
 
-    username: {
+    patientname: {
         type: String,
         require: true,
         trim: true
@@ -24,7 +24,7 @@ const patientSch = mongoose.Schema({
         type: String,
         require: true,
         trim: true
-    
+
     },
 
     address: {
@@ -61,32 +61,24 @@ const patientSch = mongoose.Schema({
         type: String,
         trim: true
     },
-
-
 },
     { timestamps: true }
 )
 
-userSchema.methods.generateAuthToken = async function () {
-    // Generate an auth token for the user
-    const user = this
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
-    user.tokens = user.tokens.concat({ token })
-    await user.save()
-    return token
+patientSch.statics.checkCrediantialsDb = async (username, password) => {
+    const patientCheck = await patients.findOne({ username: username, password: password })
+    return patientCheck
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
-    // Search for a user by email and password.
-    const user = await User.findOne({ email })
-    if (!user) {
-        throw new Error({ error: 'Invalid login credentials' })
-    }
-    const isPasswordMatch = await bcrypt.compare(password, user.password)
-    if (!isPasswordMatch) {
-        throw new Error({ error: 'Invalid login credentials' })
-    }
-    return user
+
+patientSch.methods.generateAuthToken = async function () {
+    const patientAuth = this
+    const token = jwt.sign({ _id: patientAuth._id.toString() }, 'thisismynewcourse')
+
+    console.log(token);
+    patientAuth.tokens = patientAuth.tokens.concat({ token: token })
+    await patientAuth.save()
+    return token
 }
 
 const Patient = mongoose.model('patient', patientSch)
