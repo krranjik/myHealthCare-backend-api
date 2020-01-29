@@ -3,7 +3,8 @@ const patient = require("../models/patientModel")
 //register patient function
 
 exports.registerPatient = (req, res) => {
-    req.files.map(function (items) {
+   
+    console.log(req.body)
         const regPatient = new patient({
             name: req.body.name,
             username: req.body.username,
@@ -15,8 +16,7 @@ exports.registerPatient = (req, res) => {
             bloodgroup: req.body.bloodgroup,
             weight: req.body.weight,
             height: req.body.height,
-            phone: req.body.phone,
-            patient_img: items.filename
+            phone: req.body.phone
         })
         regPatient.save().then(function () {
             res.send("Patient has been registered")
@@ -24,7 +24,7 @@ exports.registerPatient = (req, res) => {
         }).catch(function (e) {
             res.send(e)
         })
-    })
+    
 }
 
 //select all patient function
@@ -52,6 +52,7 @@ exports.findPatientById = (req, res) => {
 //update patient function
 
 exports.updatePatient = (req, res) => {
+    console.log(req.body)
     patient.findOneAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Patient has been updated successfully")
@@ -80,8 +81,23 @@ exports.patientLogin = async (req, res) => {
         const patient1 = await patient.checkCrediantialsDb(req.body.username,
             req.body.password)
         const token = await patient1.generateAuthToken()
-        const name = await patient1.name;
-        res.send({ name, token })
+        // const name = await patient1.name;
+        res.send({
+            id:patient1.id,
+            name: patient1.name,
+            token: token,
+            username: patient1.username,
+            password: patient1.password,
+            email: patient1.email,
+            address: patient1.address,
+            dob: patient1.dob,
+            gender: patient1.gender,
+            bloodgroup: patient1.bloodgroup,
+            weight: patient1.weight,
+            height: patient1.height,
+            phone: patient1.phone,
+            patient_img: patient1.patient_img
+        })
     }
     catch (e) {
         res.status(400).send()

@@ -11,7 +11,7 @@ exports.registerDoctor = (req, res) => {
             description: req.body.description,
             location: req.body.location,
             rating: req.body.rating,
-            doctor_img: items.filename
+            doctor_img: items.filename,
         })
     regDoctor.save().then(function () {
         res.send("Doctor has been added successfully")

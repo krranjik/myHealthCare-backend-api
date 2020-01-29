@@ -22,7 +22,7 @@ var imageFileFilter = (req, file, cb) => {
 var upload = multer({
     storage: storage,
     fileFilter: imageFileFilter,
-    limits: { fileSize: 10000000000000 }
+    limits: { fileSize: 1000000000000 }
 }).array('image', 1);
 
 module.exports = upload
