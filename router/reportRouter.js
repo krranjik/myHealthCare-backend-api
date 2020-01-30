@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const report = require("../controllers/reportController")
-const upload = require('../controllers/uploadImage');
+const upload = require('../middleware/uploadImage');
 
 router.post("/addreport", upload, report.addReport)
 router.get("/getreport", report.getReport)

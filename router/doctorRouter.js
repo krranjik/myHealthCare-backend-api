@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const upload = require('../controllers/uploadImage');
+const upload = require('../middleware/uploadImage');
 const doctor = require("../controllers/doctorController")
 
 router.post("/registerdoctor", upload, doctor.registerDoctor)

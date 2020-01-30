@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 
 var storage = multer.diskStorage({
-    destination: './public/image',
+    destination: './public',
     filename: (req, file, callback) => {
         let ext = path.extname(file.originalname);
         let img = file.originalname.split('.').slice(0, -1).join('.');

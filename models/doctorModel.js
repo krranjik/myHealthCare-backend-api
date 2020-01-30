@@ -37,7 +37,7 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
-    doctor_img: {
+    image: {
         type: String,
         require: true,
         trim: true

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const prescription = require("../controllers/prescriptionController")
-const upload = require('../controllers/uploadImage');
+const upload = require('../middleware/uploadImage');
 
 router.post("/addprescription", upload, prescription.addPrescription)
 router.get("/getprescription", prescription.getPrescription)

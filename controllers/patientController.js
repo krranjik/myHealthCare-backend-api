@@ -96,7 +96,7 @@ exports.patientLogin = async (req, res) => {
             weight: patient1.weight,
             height: patient1.height,
             phone: patient1.phone,
-            patient_img: patient1.patient_img
+            image: patient1.image
         })
     }
     catch (e) {
