@@ -15,10 +15,10 @@ exports.registeruser = (req, res) => {
 
 //select all user function
 
-exports.getuser = (req, res) => {
-    const getAlluser = user
-        .find().then(function (getAlluser) {
-            res.send(getAlluser)
+exports.getUser = (req, res) => {
+    const getAllUser = user
+        .find().then(function (getAllUser) {
+            res.send(getAllUser)
         }).catch(function (e) {
             res.send(e)
         })

@@ -35,6 +35,7 @@ exports.getDoctor = (req, res) => {
 //select doctor by id function
 
 exports.findDoctorById = (req, res) => {
+    console.log(req.params._id)
     doctor.findById(req.params._id)
         .then(function (doctorById) {
             res.send(doctorById)
