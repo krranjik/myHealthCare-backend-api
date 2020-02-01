@@ -7,6 +7,12 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
+    gender: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
     department: {
         type: String,
         require: true,

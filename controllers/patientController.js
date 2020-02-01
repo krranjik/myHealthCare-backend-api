@@ -3,8 +3,8 @@ const patient = require("../models/patientModel")
 //register patient function
 
 exports.registerPatient = (req, res) => {
-   
-    console.log(req.body)
+
+    req.files.map(function (items) {
         const regPatient = new patient({
             name: req.body.name,
             username: req.body.username,
@@ -16,7 +16,8 @@ exports.registerPatient = (req, res) => {
             bloodgroup: req.body.bloodgroup,
             weight: req.body.weight,
             height: req.body.height,
-            phone: req.body.phone
+            phone: req.body.phone,
+            image: items.filename,
         })
         regPatient.save().then(function () {
             res.send("Patient has been registered")
@@ -24,7 +25,8 @@ exports.registerPatient = (req, res) => {
         }).catch(function (e) {
             res.send(e)
         })
-    
+
+    })
 }
 
 //select all patient function
@@ -82,7 +84,7 @@ exports.patientLogin = async (req, res) => {
             req.body.password)
         const token = await patient1.generateAuthToken()
         res.send({
-            id:patient1.id,
+            id: patient1.id,
             name: patient1.name,
             token: token,
             username: patient1.username,

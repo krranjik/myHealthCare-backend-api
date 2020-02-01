@@ -6,6 +6,7 @@ exports.registerDoctor = (req, res) => {
     req.files.map(function (items) {
         const regDoctor = new doctor({
             name: req.body.name,
+            gender: req.body.gender,
             department: req.body.department,
             phone: req.body.phone,
             description: req.body.description,
