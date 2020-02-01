@@ -81,7 +81,6 @@ exports.patientLogin = async (req, res) => {
         const patient1 = await patient.checkCrediantialsDb(req.body.username,
             req.body.password)
         const token = await patient1.generateAuthToken()
-        // const name = await patient1.name;
         res.send({
             id:patient1.id,
             name: patient1.name,

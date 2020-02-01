@@ -57,16 +57,15 @@ exports.deleteuser = (req, res) => {
         })
 }
 
-//function for Login Function
+//function for Login
 
 exports.userLogin = async (req, res) => {
-
-
     try {
+        console.log(req.body)
         const user1 = await user.checkCrediantialsDb(req.body.username,
             req.body.password)
         const token = await user1.generateAuthToken()
-        const name = await user1.name;
+        const name = await user1.username;
         res.send({ name, token })
     }
     catch (e) {

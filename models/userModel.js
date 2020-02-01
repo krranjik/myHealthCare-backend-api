@@ -19,10 +19,12 @@ const userSch = mongoose.Schema({
             type: String,
         }
     }]
-})
+},
+    { timestamps: true }
+)
 
-userSch.statics.checkCrediantialsDb = async (email, password) => {
-    const userCheck = await users.findOne({ email: email, password: password })
+userSch.statics.checkCrediantialsDb = async (username, password) => {
+    const userCheck = await User.findOne({ username: username, password: password })
     return userCheck
 }
 
@@ -37,5 +39,4 @@ userSch.methods.generateAuthToken = async function () {
 }
 
 const User = mongoose.model('user', userSch)
-
 module.exports = User

@@ -4,6 +4,7 @@ require("./database/databaseFile")
 // Import express
 const express = require('express')
 const bodyParser = require("body-parser")
+var cors = require('cors')
 
 // Initialize the app
 const app = express()
@@ -23,6 +24,7 @@ const appointmentRouter = require("./router/appointmentRouter")
 const prescriptionRouter = require("./router/prescriptionRouter")
 const reportRouter = require("./router/reportRouter")
 
+app.use(cors())
 //sending json data in UI
 app.use(express.json())
 
