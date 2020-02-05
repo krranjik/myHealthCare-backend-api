@@ -33,7 +33,8 @@ exports.getReport = (req, res) => {
 //select report by id function
 
 exports.getReportById = (req, res) => {
-    report.findById(req.params._id)
+    console.log(req.params._id)
+    report.find({patient_id:req.params._id}).populate('patient_id').populate('doctor_id')
         .then(function (reportById) {
             res.send(reportById)
         }).catch(function (e) {

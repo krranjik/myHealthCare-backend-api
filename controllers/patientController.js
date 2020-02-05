@@ -58,6 +58,8 @@ exports.findPatientById = (req, res) => {
     patient.findById(req.params._id)
         .then(function (patientById) {
             res.send(patientById)
+            console.log(patientById)
+
         }).catch(function (e) {
             res.send(e)
         })
@@ -66,6 +68,15 @@ exports.findPatientById = (req, res) => {
 //update patient function
 
 exports.updatePatient = (req, res) => {
+    if(req.files == ""){
+        patient.findByIdAndUpdate(req.params._id, req.body)
+            .then(function () {
+                res.send("Patient has been updated successfully")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    }
+    else{
     req.files.map(function (items) {
         const updpatient = {
             name: req.body.name,
@@ -87,7 +98,9 @@ exports.updatePatient = (req, res) => {
             }).catch(function (e) {
                 res.send(e)
             })
+        
     })
+}
 }
 
 //delete patient function
