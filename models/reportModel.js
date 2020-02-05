@@ -29,7 +29,9 @@ const reportSch = mongoose.Schema({
         require: true,
         trim: true
     },
-})
+},
+    { timestamps: true }
+)
 
 const Report = mongoose.model('report', reportSch)
 module.exports = Report
