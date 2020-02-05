@@ -18,7 +18,13 @@ const reportSch = mongoose.Schema({
         trim: true
     },
 
-    report_file: {
+    report_date: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
+    image: {
         type: String,
         require: true,
         trim: true

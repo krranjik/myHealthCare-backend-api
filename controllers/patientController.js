@@ -2,6 +2,18 @@ const patient = require("../models/patientModel")
 
 //register patient function
 
+exports.addPatient = (req, res) => {
+    const rpatient = new patient(req.body)
+    rpatient.save().then(function () {
+        res.send("Patient has been registered")
+    }).catch(function (e) {
+        res.send(e)
+    })
+}
+
+
+//add patient function
+
 exports.registerPatient = (req, res) => {
 
     req.files.map(function (items) {
@@ -54,13 +66,28 @@ exports.findPatientById = (req, res) => {
 //update patient function
 
 exports.updatePatient = (req, res) => {
-    console.log(req.body)
-    patient.findOneAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Patient has been updated successfully")
-        }).catch(function (e) {
-            res.send(e)
-        })
+    req.files.map(function (items) {
+        const updpatient = {
+            name: req.body.name,
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            address: req.body.address,
+            dob: req.body.dob,
+            gender: req.body.gender,
+            bloodgroup: req.body.bloodgroup,
+            weight: req.body.weight,
+            height: req.body.height,
+            phone: req.body.phone,
+            image: items.filename,
+        }
+        patient.findByIdAndUpdate(req.params._id, updpatient)
+            .then(function () {
+                res.send("Patient has been updated successfully")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
 
 //delete patient function

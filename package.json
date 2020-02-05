@@ -4,7 +4,8 @@
   "description": "Backend for myHealthCare",
   "main": "app.js",
   "scripts": {
-    "start": "env-cmd -f ./.env nodemon ./app.js"
+    "start": "env-cmd -f ./.env nodemon ./app.js",
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -12,6 +13,7 @@
     "cors": "^2.8.5",
     "env-cmd": "^10.0.1",
     "express": "^4.17.1",
+    "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.4.1",
     "mongoose": "^5.7.13",

@@ -14,13 +14,14 @@ exports.registerDoctor = (req, res) => {
             rating: req.body.rating,
             image: items.filename,
         })
-    regDoctor.save().then(function () {
-        res.send("Doctor has been added successfully")
+        regDoctor.save().then(function () {
+            res.send("Doctor has been added successfully")
 
-    }).catch(function (e) {
-        res.send(e)
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
-})}
+}
 
 //select all doctor function
 
@@ -36,6 +37,7 @@ exports.getDoctor = (req, res) => {
 //select doctor by id function
 
 exports.findDoctorById = (req, res) => {
+
     console.log(req.params._id)
     doctor.findById(req.params._id)
         .then(function (doctorById) {
@@ -48,13 +50,26 @@ exports.findDoctorById = (req, res) => {
 //update doctor function
 
 exports.updateDoctor = (req, res) => {
-    doctor.findOneAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Doctor has been updated")
-        }).catch(function (e) {
-            res.send(e)
-        })
+    req.files.map(function (items) {
+        const updoctor = {
+            name: req.body.name,
+            gender: req.body.gender,
+            department: req.body.department,
+            phone: req.body.phone,
+            description: req.body.description,
+            location: req.body.location,
+            rating: req.body.rating,
+            image: items.filename,
+        }
+        doctor.findByIdAndUpdate(req.params._id, updoctor)
+            .then(function () {
+                res.send("Doctor has been updated")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
+
 //delete doctor function
 
 exports.deleteDoctor = (req, res) => {

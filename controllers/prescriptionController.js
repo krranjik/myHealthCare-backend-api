@@ -43,12 +43,22 @@ exports.getPrescriptionById = (req, res) => {
 //update prescription function
 
 exports.updatePrescription = (req, res) => {
-    prescription.findOneAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Prescription has been updated")
-        }).catch(function (e) {
-            res.send(e)
-        })
+
+    req.files.map(function (items) {
+        const updpres = {
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            prescription_name: req.body.prescription_name,
+            prescription_file: items.filename
+        }
+
+        prescription.findByIdAndUpdate(req.params._id, updpres)
+            .then(function () {
+                res.send("Prescription has been updated")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
 
 //delete prescription function

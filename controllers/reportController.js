@@ -8,6 +8,7 @@ exports.addReport = (req, res) => {
             patient_id: req.body.patient_id,
             doctor_id: req.body.doctor_id,
             report_name: req.body.report_name,
+            report_date: req.body.report_date,
             report_file: items.filename
         })
         addrep.save().then(function () {
@@ -22,7 +23,7 @@ exports.addReport = (req, res) => {
 
 exports.getReport = (req, res) => {
     const getAllReport = report
-        .find().then(function (getAllReport) {
+        .find().populate('patient_id').populate('doctor_id').then(function (getAllReport) {
             res.send(getAllReport)
         }).catch(function (e) {
             res.send(e)
