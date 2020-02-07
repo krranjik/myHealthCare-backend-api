@@ -80,12 +80,8 @@ exports.updatePatient = (req, res) => {
     req.files.map(function (items) {
         const updpatient = {
             name: req.body.name,
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
             address: req.body.address,
             dob: req.body.dob,
-            gender: req.body.gender,
             bloodgroup: req.body.bloodgroup,
             weight: req.body.weight,
             height: req.body.height,

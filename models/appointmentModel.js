@@ -2,19 +2,19 @@ const mongoose = require('mongoose')
 
 const appointmentSch = mongoose.Schema({
     patient_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'patient',
         trim: true
     },
 
     doctor_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'doctor',
         trim: true
     },
 
     appoint_date: {
-        type: Date,
+        type: String,
         require: true,
         trim: true
     },
@@ -24,7 +24,17 @@ const appointmentSch = mongoose.Schema({
         require: true,
         trim: true
     },
-})
+
+    status: {
+        type: String,
+        require: true,
+        trim: true,
+        default: "Pending"
+    }
+
+},
+    { timestamps: true }
+)
 
 const Appointment = mongoose.model('appointment', appointmentSch)
 

@@ -49,7 +49,7 @@ const doctorSch = mongoose.Schema({
         trim: true
     }
 },
-    { timestamps: true }
+   
 )
 
 const Doctor = mongoose.model('doctor', doctorSch)
