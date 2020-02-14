@@ -36,7 +36,7 @@ exports.getAppointmentById = (req, res) => {
 //update appointment function
 
 exports.updateAppointment = (req, res) => {
-    appointment.findOneAndUpdate(req.params._id, req.body)
+    appointment.findByIdAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Appointment has been updated")
         }).catch(function (e) {
@@ -47,7 +47,7 @@ exports.updateAppointment = (req, res) => {
 //delete appointment function
 
 exports.deleteAppointment = (req, res) => {
-    appointment.findOneAndDelete(req.params._id)
+    appointment.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Appointment has been deleted")
         }).catch(function (e) {
