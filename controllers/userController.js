@@ -38,7 +38,7 @@ exports.finduserById = (req, res) => {
 //update user function
 
 exports.updateuser = (req, res) => {
-    user.findOneAndUpdate(req.params._id, req.body)
+    user.findByIdAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("user has been updated successfully")
         }).catch(function (e) {
@@ -49,7 +49,7 @@ exports.updateuser = (req, res) => {
 //delete user function
 
 exports.deleteuser = (req, res) => {
-    user.findOneAndDelete(req.params._id)
+    user.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("user has been deleted")
         }).catch(function (e) {

@@ -57,7 +57,7 @@ exports.updatePrescription = (req, res) => {
 //delete prescription function
 
 exports.deletePrescription = (req, res) => {
-    prescription.findOneAndDelete(req.params._id)
+    prescription.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Prescription has been deleted")
         }).catch(function (e) {

@@ -45,7 +45,7 @@ exports.getReportById = (req, res) => {
 //update report function
 
 exports.updateReport = (req, res) => {
-    report.findOneAndUpdate(req.params._id, req.body)
+    report.findByIdAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Report has been updated")
         }).catch(function (e) {
@@ -56,7 +56,7 @@ exports.updateReport = (req, res) => {
 //delete report function
 
 exports.deleteReport = (req, res) => {
-    report.findOneAndDelete(req.params._id)
+    report.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Report has been deleted")
         }).catch(function (e) {
