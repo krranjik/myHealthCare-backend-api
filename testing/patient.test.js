@@ -34,15 +34,10 @@ describe('User Schema test anything', () => {
             .then((pp) => {
                 expect(pp.password).toEqual('ranjit')
             })
-
     });
     // the code below is for delete testing
     it('to test the delete product is working or not', async () => {
         const status = await User.deleteMany();
         expect(status.ok).toBe(1);
     });
-
-
-
-
 })

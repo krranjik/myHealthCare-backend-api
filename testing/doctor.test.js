@@ -41,8 +41,4 @@ describe('Doctor Schema test anything', () => {
         const status = await User.deleteMany();
         expect(status.ok).toBe(1);
     });
-
-
-
-
 })
