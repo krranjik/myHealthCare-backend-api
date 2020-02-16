@@ -102,7 +102,7 @@ exports.updatePatient = (req, res) => {
 //delete patient function
 
 exports.deletePatient = (req, res) => {
-    patient.findOneAndDelete(req.params._id)
+    patient.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Patient has been deleted")
         }).catch(function (e) {
