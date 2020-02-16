@@ -10,5 +10,6 @@ router.get("/finduserbyid/:_id", user.finduserById)
 router.put("/updateuser/:_id", user.updateuser)
 router.delete("/deleteuser/:_id", user.deleteuser)
 router.post("/userlogin", user.userLogin)
+router.get("/logout", userAuth, user.logout)
 
 module.exports = router

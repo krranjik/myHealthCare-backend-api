@@ -6,7 +6,7 @@ const auth = require("../middleware/userAuth")
 
 //for admin panel
 router.post("/registerdoctor", [auth, upload], doctor.registerDoctor)
-router.get("/getalldoctors", auth, doctor.getDoctor)
+router.get("/getalldoctors", doctor.getDoctor)
 router.get("/getdoctorbyid/:_id", auth, doctor.findDoctorById)
 router.put("/updatedoctor/:_id", [auth, upload], doctor.updateDoctor)
 router.delete("/deletedoctor/:_id", auth, doctor.deleteDoctor)

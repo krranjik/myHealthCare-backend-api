@@ -9,7 +9,7 @@ exports.addReport = (req, res) => {
             doctor_id: req.body.doctor_id,
             report_name: req.body.report_name,
             report_date: req.body.report_date,
-            report_file: items.filename
+            image: items.filename,
         })
         addrep.save().then(function () {
             res.send("Report has been added")
@@ -34,7 +34,7 @@ exports.getReport = (req, res) => {
 
 exports.getReportById = (req, res) => {
     console.log(req.params._id)
-    report.find({patient_id:req.params._id}).populate('patient_id').populate('doctor_id')
+    report.find({ patient_id: req.params._id }).populate('patient_id').populate('doctor_id')
         .then(function (reportById) {
             res.send(reportById)
         }).catch(function (e) {
@@ -45,12 +45,21 @@ exports.getReportById = (req, res) => {
 //update report function
 
 exports.updateReport = (req, res) => {
-    report.findByIdAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Report has been updated")
-        }).catch(function (e) {
-            res.send(e)
-        })
+    req.files.map(function (items) {
+        const upreport = {
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            report_name: req.body.report_name,
+            report_date: req.body.report_date,
+            image: items.filename,
+        }
+        report.findByIdAndUpdate(req.params._id, upreport)
+            .then(function () {
+                res.send("Report has been updated")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
 
 //delete report function

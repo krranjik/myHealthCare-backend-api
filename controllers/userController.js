@@ -71,4 +71,26 @@ exports.userLogin = async (req, res) => {
     catch (e) {
         res.status(400).send()
     }
-}   
+}
+
+//function for logout
+
+exports.logout = async function (req, res) {
+    // Log User out of the application
+    try {
+        var user = req.user
+        user.tokens = user.tokens.filter((token) => {
+            return token.token != req.token
+        })
+        await user.save()
+        res.json({
+            status: "success",
+            message: "Logout Successful",
+        })
+    } catch (error) {
+        res.send({
+            status: 500,
+            message: error.message
+        })
+    }
+}
