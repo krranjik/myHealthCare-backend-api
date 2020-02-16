@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 const reportSch = mongoose.Schema({
     patient_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'patient',
         trim: true
     },
 
     doctor_id: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: 'doctor',
         trim: true
     },
 
@@ -18,12 +18,20 @@ const reportSch = mongoose.Schema({
         trim: true
     },
 
-    report_file: {
+    report_date: {
         type: String,
         require: true,
         trim: true
     },
-})
+
+    image: {
+        type: String,
+        require: true,
+        trim: true
+    },
+},
+    { timestamps: true }
+)
 
 const Report = mongoose.model('report', reportSch)
 module.exports = Report

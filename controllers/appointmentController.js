@@ -16,7 +16,7 @@ exports.addAppointment = (req, res) => {
 
 exports.getAppointment = (req, res) => {
     const getAppoint = appointment
-        .find().then(function (getAppoint) {
+        .find().populate('patient_id').populate('doctor_id').then(function (getAppoint) {
             res.send(getAppoint)
         }).catch(function (e) {
             res.send(e)
@@ -26,10 +26,9 @@ exports.getAppointment = (req, res) => {
 //select appointment by id function
 
 exports.getAppointmentById = (req, res) => {
-    appointment.findById(req.params._id)
-        .then(function (appointmentById) {
-            res.send(appointmentById)
-        }).catch(function (e) {
+    const getAppoint = appointment.find({patient_id: req.params._id}).populate('patient_id').populate('doctor_id').then(function (getAppoint) {
+            res.send(getAppoint)
+        }).catch(function (e) { 
             res.send(e)
         })
 }
@@ -37,7 +36,7 @@ exports.getAppointmentById = (req, res) => {
 //update appointment function
 
 exports.updateAppointment = (req, res) => {
-    appointment.findOneAndUpdate(req.params._id, req.body)
+    appointment.findByIdAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Appointment has been updated")
         }).catch(function (e) {
@@ -48,7 +47,7 @@ exports.updateAppointment = (req, res) => {
 //delete appointment function
 
 exports.deleteAppointment = (req, res) => {
-    appointment.findOneAndDelete(req.params._id)
+    appointment.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Appointment has been deleted")
         }).catch(function (e) {

@@ -4,6 +4,7 @@ require("./database/databaseFile")
 // Import express
 const express = require('express')
 const bodyParser = require("body-parser")
+var cors = require('cors')
 
 // Initialize the app
 const app = express()
@@ -12,6 +13,7 @@ const app = express()
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use('/public', express.static(__dirname+'/public'))
 app.use(bodyParser.json());
 
 //calling Routers
@@ -22,6 +24,7 @@ const appointmentRouter = require("./router/appointmentRouter")
 const prescriptionRouter = require("./router/prescriptionRouter")
 const reportRouter = require("./router/reportRouter")
 
+app.use(cors())
 //sending json data in UI
 app.use(express.json())
 
@@ -33,4 +36,4 @@ app.use(appointmentRouter)
 app.use(prescriptionRouter)
 app.use(reportRouter)
 
-app.listen(4000)
+app.listen("4444")

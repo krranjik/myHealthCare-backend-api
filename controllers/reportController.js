@@ -3,11 +3,19 @@ const report = require('../models/reportModel')
 //add report function
 
 exports.addReport = (req, res) => {
-    const addrep = new report(req.body)
-    addrep.save().then(function () {
-        res.send("Report has been added")
-    }).catch(function (e) {
-        res.send(e)
+    req.files.map(function (items) {
+        const addrep = new report({
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            report_name: req.body.report_name,
+            report_date: req.body.report_date,
+            image: items.filename,
+        })
+        addrep.save().then(function () {
+            res.send("Report has been added")
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
 }
 
@@ -15,7 +23,7 @@ exports.addReport = (req, res) => {
 
 exports.getReport = (req, res) => {
     const getAllReport = report
-        .find().then(function (getAllReport) {
+        .find().populate('patient_id').populate('doctor_id').then(function (getAllReport) {
             res.send(getAllReport)
         }).catch(function (e) {
             res.send(e)
@@ -25,7 +33,8 @@ exports.getReport = (req, res) => {
 //select report by id function
 
 exports.getReportById = (req, res) => {
-    report.findById(req.params._id)
+    console.log(req.params._id)
+    report.find({ patient_id: req.params._id }).populate('patient_id').populate('doctor_id')
         .then(function (reportById) {
             res.send(reportById)
         }).catch(function (e) {
@@ -36,18 +45,27 @@ exports.getReportById = (req, res) => {
 //update report function
 
 exports.updateReport = (req, res) => {
-    report.findOneAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Report has been updated")
-        }).catch(function (e) {
-            res.send(e)
-        })
+    req.files.map(function (items) {
+        const upreport = {
+            patient_id: req.body.patient_id,
+            doctor_id: req.body.doctor_id,
+            report_name: req.body.report_name,
+            report_date: req.body.report_date,
+            image: items.filename,
+        }
+        report.findByIdAndUpdate(req.params._id, upreport)
+            .then(function () {
+                res.send("Report has been updated")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
 
 //delete report function
 
 exports.deleteReport = (req, res) => {
-    report.findOneAndDelete(req.params._id)
+    report.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Report has been deleted")
         }).catch(function (e) {

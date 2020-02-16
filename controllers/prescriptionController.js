@@ -3,6 +3,7 @@ const prescription = require('../models/prescriptionModel')
 //add prescription function
 
 exports.addPrescription = (req, res) => {
+    console.log(req.body)
     const addPres = new prescription(req.body)
     addPres.save().then(function () {
         res.send("Prescription has been added")
@@ -15,7 +16,7 @@ exports.addPrescription = (req, res) => {
 
 exports.getPrescription = (req, res) => {
     const getAllPres = prescription
-        .find().then(function (getAllPres) {
+        .find().populate('patient_id').populate('doctor_id').then(function (getAllPres) {
             res.send(getAllPres)
         }).catch(function (e) {
             res.send(e)
@@ -25,7 +26,7 @@ exports.getPrescription = (req, res) => {
 //select prescription by id function
 
 exports.getPrescriptionById = (req, res) => {
-    prescription.findById(req.params._id)
+    prescription.find({ patient_id: req.params._id }).populate('patient_id')
         .then(function (presById) {
             res.send(presById)
         }).catch(function (e) {
@@ -36,7 +37,7 @@ exports.getPrescriptionById = (req, res) => {
 //update prescription function
 
 exports.updatePrescription = (req, res) => {
-    prescription.findOneAndUpdate(req.params._id, req.body)
+    prescription.findByIdAndUpdate(req.params._id, req.body)
         .then(function () {
             res.send("Prescription has been updated")
         }).catch(function (e) {
@@ -47,7 +48,7 @@ exports.updatePrescription = (req, res) => {
 //delete prescription function
 
 exports.deletePrescription = (req, res) => {
-    prescription.findOneAndDelete(req.params._id)
+    prescription.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Prescription has been deleted")
         }).catch(function (e) {

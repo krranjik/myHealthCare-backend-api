@@ -3,12 +3,23 @@ const doctor = require('../models/doctorModel')
 //doctor register function
 
 exports.registerDoctor = (req, res) => {
-    const regDoctor = new doctor(req.body)
-    regDoctor.save().then(function () {
-        res.send("Doctor has been added successfully")
+    req.files.map(function (items) {
+        const regDoctor = new doctor({
+            name: req.body.name,
+            gender: req.body.gender,
+            department: req.body.department,
+            phone: req.body.phone,
+            description: req.body.description,
+            location: req.body.location,
+            rating: req.body.rating,
+            image: items.filename,
+        })
+        regDoctor.save().then(function () {
+            res.send("Doctor has been added successfully")
 
-    }).catch(function (e) {
-        res.send(e)
+        }).catch(function (e) {
+            res.send(e)
+        })
     })
 }
 
@@ -26,6 +37,8 @@ exports.getDoctor = (req, res) => {
 //select doctor by id function
 
 exports.findDoctorById = (req, res) => {
+
+    console.log(req.params._id)
     doctor.findById(req.params._id)
         .then(function (doctorById) {
             res.send(doctorById)
@@ -37,17 +50,30 @@ exports.findDoctorById = (req, res) => {
 //update doctor function
 
 exports.updateDoctor = (req, res) => {
-    doctor.findOneAndUpdate(req.params._id, req.body)
-        .then(function () {
-            res.send("Doctor has been updated")
-        }).catch(function (e) {
-            res.send(e)
-        })
+    req.files.map(function (items) {
+        const updoctor = {
+            name: req.body.name,
+            gender: req.body.gender,
+            department: req.body.department,
+            phone: req.body.phone,
+            description: req.body.description,
+            location: req.body.location,
+            rating: req.body.rating,
+            image: items.filename,
+        }
+        doctor.findByIdAndUpdate(req.params._id, updoctor)
+            .then(function () {
+                res.send("Doctor has been updated")
+            }).catch(function (e) {
+                res.send(e)
+            })
+    })
 }
+
 //delete doctor function
 
 exports.deleteDoctor = (req, res) => {
-    doctor.findOneAndDelete(req.params._id)
+    doctor.findByIdAndDelete(req.params._id)
         .then(function () {
             res.send("Doctor has been deleted")
         }).catch(function (e) {

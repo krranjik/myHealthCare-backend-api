@@ -7,6 +7,12 @@ const doctorSch = mongoose.Schema({
         trim: true
     },
 
+    gender: {
+        type: String,
+        require: true,
+        trim: true
+    },
+
     department: {
         type: String,
         require: true,
@@ -36,8 +42,14 @@ const doctorSch = mongoose.Schema({
         require: true,
         trim: true
     },
+
+    image: {
+        type: String,
+        require: true,
+        trim: true
+    }
 },
-    { timestamps: true }
+   
 )
 
 const Doctor = mongoose.model('doctor', doctorSch)
